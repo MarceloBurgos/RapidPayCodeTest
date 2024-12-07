@@ -1,0 +1,21 @@
+﻿using FluentValidation;
+using RapidPay.Domain.Entities;
+using RapidPay.Domain.ExternalServices;
+using RapidPay.Domain.Repositories;
+using RapidPay.Domain.Validators;
+
+namespace RapidPay.Application.PaymentFees;
+
+public class PaymentTransactionService(IGenericRepository<Guid> genericRepository, IUniversalFeesExchangeProvider ufeProvider)
+{
+    public async Task Pay(long cardNumber, decimal amount)
+    {
+        var paymentCard = await genericRepository.GetBy<PaymentCard>(x => x.Number == cardNumber);
+        var paymentTransaction = new PaymentTransaction(amount, ufeProvider.NextFee(), paymentCard!);
+
+        var paymentTransactionValidator = new PaymentTransactionValidator(genericRepository);
+        await paymentTransactionValidator.ValidateAndThrowAsync(paymentTransaction);
+
+        await genericRepository.Save(paymentTransaction);
+    }
+}
