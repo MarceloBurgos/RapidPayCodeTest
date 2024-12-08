@@ -9,3 +9,13 @@ namespace RapidPay.Domain.CustomExceptions;
 public class PaymentCardNotFoundException(long cardNumber) : Exception($"{ValidationMessages.RP004}. Card: {cardNumber}")
 {
 }
+
+public class PaymentTransactionException(long cardNumber) : Exception
+{
+	public long CardNumber { get; } = cardNumber;
+
+	/// <summary>
+	/// Errors during entity validation.
+	/// </summary>
+	public ICollection<(string Code, string Description)> Errors { get; } = [];
+}

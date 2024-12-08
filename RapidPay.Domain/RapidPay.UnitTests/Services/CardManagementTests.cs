@@ -1,22 +1,11 @@
 ﻿using FluentAssertions;
 using RapidPay.Application.CardManagement;
-using RapidPay.Application.PaymentFees;
 using RapidPay.Domain.CustomExceptions;
 using RapidPay.Domain.Entities;
 using RapidPay.Domain.Resources;
 using Xunit.Abstractions;
 
 namespace RapidPay.UnitTests.Services;
-
-public class PaymentTransactionTests : RapidPayServiceBase
-{
-	public PaymentTransactionTests(ITestOutputHelper output, ContextSetUpInitializerFixture contextSetUpInitializerFixture) : base(output, contextSetUpInitializerFixture)
-	{
-		//_paymentTransactionService = new PaymentTransactionService(GenericRepository);
-	}
-
-	private readonly PaymentTransactionService _paymentTransactionService;
-}
 
 public class CardManagementTests : RapidPayServiceBase
 {

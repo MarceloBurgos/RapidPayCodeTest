@@ -130,12 +130,6 @@
     <value>The card number does not exists</value>
   </data>
   <data name="RP005" xml:space="preserve">
-    <value>The card number is already registered</value>
-  </data>
-  <data name="RP006" xml:space="preserve">
     <value>The amount to pay must be greater than 0</value>
-  </data>
-  <data name="RP007" xml:space="preserve">
-    <value>There is not enouth balance to process payment</value>
   </data>
 </root>

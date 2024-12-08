@@ -11,7 +11,7 @@ public static class DomainServiceConfigurationExtension
 {
 	public static IServiceCollection AddDomainServices(this IServiceCollection services)
 	{
-		services.AddSingleton<IUniversalFeesExchangeProvider, RandomPaymentFeeProvider>();
+		services.AddSingleton<IUniversalFeesExchangeProvider, HourlyFeeGenerationProvider>();
 
 		services.AddScoped<CardManagementService>();
 		services.AddScoped<PaymentTransactionService>();

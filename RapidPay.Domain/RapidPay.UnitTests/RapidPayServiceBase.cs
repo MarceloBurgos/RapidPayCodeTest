@@ -1,4 +1,5 @@
-﻿using RapidPay.Infrastructure;
+﻿using RapidPay.Application.PaymentFees;
+using RapidPay.Infrastructure;
 using RapidPay.Infrastructure.Repositories;
 using Xunit.Abstractions;
 
@@ -12,6 +13,7 @@ public abstract class RapidPayServiceBase : IClassFixture<ContextSetUpInitialize
 		Context = fixture.Context;
 
 		GenericRepository = new(Context);
+		CustomTimeFeeExchangeProvider = new FiveSecondsTimeFeeGenerationProvider();
 
 		Output = output;
 	}
@@ -21,4 +23,6 @@ public abstract class RapidPayServiceBase : IClassFixture<ContextSetUpInitialize
 	protected RapidPayContext Context { get; }
 
 	protected GenericRepository GenericRepository { get; }
+
+	protected RandomPaymentFeeProvider CustomTimeFeeExchangeProvider { get; }
 }

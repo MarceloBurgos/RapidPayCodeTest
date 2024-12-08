@@ -97,29 +97,11 @@ namespace RapidPay.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The card number is already registered.
+        ///   Looks up a localized string similar to The amount to pay must be greater than 0.
         /// </summary>
         public static string RP005 {
             get {
                 return ResourceManager.GetString("RP005", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The amount to pay must be greater than 0.
-        /// </summary>
-        public static string RP006 {
-            get {
-                return ResourceManager.GetString("RP006", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There is not enouth balance to process payment.
-        /// </summary>
-        public static string RP007 {
-            get {
-                return ResourceManager.GetString("RP007", resourceCulture);
             }
         }
     }

@@ -2,20 +2,14 @@
 
 namespace RapidPay.Application.PaymentFees;
 
-public class RandomPaymentFeeProvider : IUniversalFeesExchangeProvider
+public abstract class RandomPaymentFeeProvider(long rangeTicks) : IUniversalFeesExchangeProvider
 {
-	public RandomPaymentFeeProvider()
-	{
-		lastFeeUpdate = DateTime.UtcNow;
-		lastFeeAmount = RandomFee();
-	}
-
 	public decimal NextFee()
 	{
 		lock (lockObject)
 		{
 			var rangeUpdate = DateTime.UtcNow - lastFeeUpdate;
-			if (rangeUpdate.Ticks > TimeSpan.TicksPerHour)
+			if (rangeUpdate.Ticks > _rangeTicks)
 			{
 				lastFeeAmount = lastFeeAmount * RandomFee();
 				lastFeeUpdate = DateTime.UtcNow;
@@ -32,7 +26,8 @@ public class RandomPaymentFeeProvider : IUniversalFeesExchangeProvider
 	}
 
 	private readonly object lockObject = new();
+	private readonly long _rangeTicks = rangeTicks;
 
-	private decimal lastFeeAmount;
-	private DateTime lastFeeUpdate;
+	private decimal lastFeeAmount = RandomFee();
+	private DateTime lastFeeUpdate = DateTime.UtcNow;
 }

@@ -24,4 +24,6 @@ public class PaymentTransaction
     public decimal TotalPayment => Amount + Fee;
 
     public virtual PaymentCard Card { get; set; }
+
+    public override string ToString() => $"Card number {Card?.Number} Amount {Amount:0.000} Fee {Fee:0.0000}";
 }

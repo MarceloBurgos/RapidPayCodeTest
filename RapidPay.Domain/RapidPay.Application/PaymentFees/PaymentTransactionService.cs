@@ -13,9 +13,11 @@ public class PaymentTransactionService(IGenericRepository<Guid> genericRepositor
         var paymentCard = await genericRepository.GetBy<PaymentCard>(x => x.Number == cardNumber);
         var paymentTransaction = new PaymentTransaction(amount, ufeProvider.NextFee(), paymentCard!);
 
-        var paymentTransactionValidator = new PaymentTransactionValidator(genericRepository);
+        var paymentTransactionValidator = new PaymentTransactionValidator(genericRepository, cardNumber);
         await paymentTransactionValidator.ValidateAndThrowAsync(paymentTransaction);
+		await genericRepository.Save(paymentTransaction);
 
-        await genericRepository.Save(paymentTransaction);
+		paymentCard!.Balance += paymentTransaction.TotalPayment;
+		await genericRepository.Save(paymentCard);
     }
 }
