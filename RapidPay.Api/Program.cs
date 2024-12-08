@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Mvc;
 using RapidPay.Api.ConfigExtensions;
+using RapidPay.Api.Middlewares;
+using RapidPay.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,8 +9,18 @@ builder.Services.AddDomainServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+builder.Services.AddMvc(options =>
+{
+	options.Filters.Add(new ProducesAttribute("application/json"));
+}).AddJsonOptions(options =>
+{
+	JsonSerializerGlobalOptions.SetGlobalOptions(options.JsonSerializerOptions);
+});
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -24,5 +37,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseExceptionHandler();
 
 app.Run();

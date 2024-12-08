@@ -13,7 +13,7 @@ public class SqlitePersistenceConfigurationProvider(IConfiguration configuration
 	public DbContextOptionsBuilder ConfigurePersistenceProvider(DbContextOptionsBuilder optionsBuilder)
 	{
 		optionsBuilder.UseLazyLoadingProxies();
-		optionsBuilder.UseSqlite(configuration.GetConnectionString("Sqlite"));
+		optionsBuilder.UseSqlite(configuration.GetConnectionString("Sqlite"), x => x.MigrationsAssembly("RapidPay.Api"));
 		return optionsBuilder;
 	}
 }

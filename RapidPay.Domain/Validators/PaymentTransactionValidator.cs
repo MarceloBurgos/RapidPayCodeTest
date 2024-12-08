@@ -9,6 +9,9 @@ namespace RapidPay.Domain.Validators;
 
 public class PaymentTransactionValidator : AbstractValidator<PaymentTransaction>
 {
+	/// <summary>
+	/// Creates a valid <see cref="PaymentTransactionValidator"/> instance.
+	/// </summary>
 	public PaymentTransactionValidator(IGenericRepository<Guid> genericRepository, long cardNumber)
 	{
 		_cardNumber = cardNumber;

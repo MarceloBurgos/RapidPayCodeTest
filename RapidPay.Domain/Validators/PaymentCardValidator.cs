@@ -9,6 +9,9 @@ namespace RapidPay.Domain.Validators;
 
 public class PaymentCardValidator : AbstractValidator<PaymentCard>
 {
+	/// <summary>
+	/// Creates a valid <see cref="PaymentCardValidator"/> instance.
+	/// </summary>
 	public PaymentCardValidator(IGenericRepository<Guid> genericRepository)
 	{
 		RuleLevelCascadeMode = CascadeMode.Stop;
