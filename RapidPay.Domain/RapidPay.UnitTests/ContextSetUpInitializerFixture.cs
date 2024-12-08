@@ -5,7 +5,7 @@ using Xunit.Abstractions;
 namespace RapidPay.UnitTests;
 
 /// <summary>
-/// Defines the set up for the <see cref="Context"/> using <see cref="SqliteConfigurationProvider"/>.
+/// Defines the set up for the <see cref="Context"/> using <see cref="TestPersistenceConfigurationProvider"/>.
 /// </summary>
 public class ContextSetUpInitializerFixture
 {
@@ -21,7 +21,7 @@ public class ContextSetUpInitializerFixture
 	{
 		var optionsBuilder = new DbContextOptionsBuilder<RapidPayContext>();
 
-		Context = new RapidPayContext(optionsBuilder.Options, new SqliteConfigurationProvider(output));
+		Context = new RapidPayContext(optionsBuilder.Options, new TestPersistenceConfigurationProvider(output));
 		Context.Database.EnsureCreated();
 	}
 }

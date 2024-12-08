@@ -10,9 +10,9 @@ namespace RapidPay.UnitTests;
 /// Defines the Sqlite provider for <see cref="DeductionsContext"/>.
 /// </summary>
 /// <remarks>
-/// Creates a valid <see cref="SqliteConfigurationProvider"/> instance.
+/// Creates a valid <see cref="TestPersistenceConfigurationProvider"/> instance.
 /// </remarks>
-public class SqliteConfigurationProvider(ITestOutputHelper output) : IDataBaseConfigurationProvider
+public class TestPersistenceConfigurationProvider(ITestOutputHelper output) : IDataBaseConfigurationProvider
 {
 	/// <inheritdoc />
 	public DbContextOptionsBuilder ConfigurePersistenceProvider(DbContextOptionsBuilder optionsBuilder)
