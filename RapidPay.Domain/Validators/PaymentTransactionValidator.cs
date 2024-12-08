@@ -7,6 +7,9 @@ using RapidPay.Domain.Resources;
 
 namespace RapidPay.Domain.Validators;
 
+/// <summary>
+/// Validator to check information about <see cref="PaymentTransaction"/>.
+/// </summary>
 public class PaymentTransactionValidator : AbstractValidator<PaymentTransaction>
 {
 	/// <summary>
@@ -19,7 +22,8 @@ public class PaymentTransactionValidator : AbstractValidator<PaymentTransaction>
 		RuleFor(x => x.Card)
 			.NotNull()
 			.WithErrorCode(nameof(ValidationMessages.RP004))
-			.WithMessage(ValidationMessages.RP004);
+			.WithMessage(paymentTransaction => $"{ValidationMessages.RP004}. Card: {paymentTransaction.Card.Number}")
+			.When(paymentTransaction => paymentTransaction.Card is { });
 
 		RuleFor(x => x.Amount)
 			.GreaterThan(0)

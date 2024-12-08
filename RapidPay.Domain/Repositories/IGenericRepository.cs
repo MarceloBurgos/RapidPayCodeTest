@@ -34,4 +34,22 @@ public interface IGenericRepository<in TId>
 	/// Asynchronous delete operation.
 	/// </returns>
 	Task Delete<TEntity>(TEntity entity) where TEntity : class;
+
+	/// <summary>
+	/// Get a list with all the entities.
+	/// </summary>
+	/// <typeparam name="TEntity">Entity type</typeparam>
+	/// <returns>
+	/// Asynchronous get list operation of types specified.
+	/// </returns>
+	Task<IList<TEntity>> ListAll<TEntity>() where TEntity : class;
+
+	/// <summary>
+	/// Get a list with all the entities that apply to the <paramref name="filterExpression"/>.
+	/// </summary>
+	/// <typeparam name="TEntity">Entity type</typeparam>
+	/// <returns>
+	/// Asynchronous get list operation of types specified. Only returns if the expression match items.
+	/// </returns>
+	Task<IList<TEntity>> ListBy<TEntity>(Expression<Func<TEntity, bool>> filterExpression) where TEntity : class;
 }

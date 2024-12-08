@@ -7,6 +7,9 @@ using RapidPay.Domain.Resources;
 
 namespace RapidPay.Domain.Validators;
 
+/// <summary>
+/// Validator to check information about <see cref="PaymentCard"/>.
+/// </summary>
 public class PaymentCardValidator : AbstractValidator<PaymentCard>
 {
 	/// <summary>
@@ -19,7 +22,7 @@ public class PaymentCardValidator : AbstractValidator<PaymentCard>
 		RuleFor(x => x.Number)
 			.InclusiveBetween(100000000000000, 999999999999999)
 			.WithErrorCode(nameof(ValidationMessages.RP001))
-			.WithMessage(ValidationMessages.RP001)
+			.WithMessage(paymentCard => $"{ValidationMessages.RP001}. Length: {paymentCard.Number.ToString().Length}")
 			.MustAsync(async (paymentCard, cardNumber, _) =>
 			{
 				return await genericRepository.GetBy<PaymentCard>(x => x.Number == cardNumber && x.Id != paymentCard.Id) is not { };

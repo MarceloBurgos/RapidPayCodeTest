@@ -29,10 +29,9 @@ public abstract class RapidPayBaseException : Exception
 			}
 
 			var messages = new StringBuilder();
-			messages.AppendLine("Validation errors:");
-			foreach (var error in Errors)
+			foreach (var (Code, Description) in Errors)
 			{
-				messages.AppendLine(error.ToString());
+				messages.AppendLine($"{Code} {Description}");
 			}
 
 			return messages.ToString().TrimEnd(Environment.NewLine.ToCharArray());

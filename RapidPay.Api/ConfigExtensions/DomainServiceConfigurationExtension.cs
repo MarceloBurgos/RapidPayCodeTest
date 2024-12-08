@@ -1,4 +1,5 @@
-﻿using RapidPay.Application.CardManagement;
+﻿using AutoMapper;
+using RapidPay.Application.CardManagement;
 using RapidPay.Application.PaymentFees;
 using RapidPay.Domain.ExternalServices;
 
@@ -12,6 +13,14 @@ public static class DomainServiceConfigurationExtension
 
 		services.AddScoped<CardManagementService>();
 		services.AddScoped<PaymentTransactionService>();
+
+		var mapperConfig = new MapperConfiguration(config =>
+		{
+			config.AddMaps(typeof(Program));
+		});
+
+		var mapper = mapperConfig.CreateMapper();
+		services.AddSingleton(mapper);
 
 		return services;
 	}

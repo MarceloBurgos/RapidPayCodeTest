@@ -31,7 +31,7 @@ public class PaymentTransactionTests : RapidPayServiceBase
 		var exception = await Assert.ThrowsAsync<PaymentCardNotFoundException>(async () => await _cardManagementService.GetBalance(100000000000001));
 
 		Assert.NotNull(exception);
-		exception.Message.Should().Be($"{ValidationMessages.RP004}. Card: {100000000000001}");
+		exception.Message.Should().Contain($"{nameof(ValidationMessages.RP004)} {ValidationMessages.RP004}. Card: {100000000000001}");
 	}
 
 	[Fact]

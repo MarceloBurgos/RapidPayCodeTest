@@ -15,9 +15,16 @@ public class PaymentTransactionService(IGenericRepository<Guid> genericRepositor
 
         var paymentTransactionValidator = new PaymentTransactionValidator(genericRepository, cardNumber);
         await paymentTransactionValidator.ValidateAndThrowAsync(paymentTransaction);
-		await genericRepository.Save(paymentTransaction);
+        await genericRepository.Save(paymentTransaction);
 
-		paymentCard!.Balance += paymentTransaction.TotalPayment;
-		await genericRepository.Save(paymentCard);
+        paymentCard!.Balance += paymentTransaction.TotalPayment;
+        await genericRepository.Save(paymentCard);
+    }
+
+    public async Task<ICollection<PaymentTransaction>> ListPayments(long? cardNumber)
+    {
+        return cardNumber.HasValue
+            ? await genericRepository.ListBy<PaymentTransaction>(x => x.Card.Number == cardNumber)
+            : await genericRepository.ListAll<PaymentTransaction>();
     }
 }

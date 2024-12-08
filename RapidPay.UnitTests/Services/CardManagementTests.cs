@@ -53,7 +53,7 @@ public class CardManagementTests : RapidPayServiceBase
 			item =>
 			{
 				item.Code.Should().Be(nameof(ValidationMessages.RP001));
-				item.Description.Should().Be(ValidationMessages.RP001);
+				item.Description.Should().Be($"{ValidationMessages.RP001}. Length: {cardNumber.ToString().Length}");
 				return true;
 			});
 	}
