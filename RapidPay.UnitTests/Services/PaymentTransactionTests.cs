@@ -172,7 +172,7 @@ public class PaymentTransactionTests : RapidPayServiceBase
 			item =>
 			{
 				item.Code.Should().Be(nameof(ValidationMessages.RP004));
-				item.Description.Should().Be(ValidationMessages.RP004);
+				item.Description.Should().Be($"{ValidationMessages.RP004}. Card: {100000000000001}");
 				return true;
 			});
 	}

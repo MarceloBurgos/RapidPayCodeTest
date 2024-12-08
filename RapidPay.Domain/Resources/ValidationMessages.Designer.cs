@@ -104,5 +104,14 @@ namespace RapidPay.Domain.Resources {
                 return ResourceManager.GetString("RP005", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user name or password is wrong.
+        /// </summary>
+        public static string RP006 {
+            get {
+                return ResourceManager.GetString("RP006", resourceCulture);
+            }
+        }
     }
 }

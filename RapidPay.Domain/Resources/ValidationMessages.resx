@@ -132,4 +132,7 @@
   <data name="RP005" xml:space="preserve">
     <value>The amount to pay must be greater than 0</value>
   </data>
+  <data name="RP006" xml:space="preserve">
+    <value>The user name or password is wrong</value>
+  </data>
 </root>

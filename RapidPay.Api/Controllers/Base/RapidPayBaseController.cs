@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RapidPay.Api.Controllers.Base;
 
 [ApiController]
-[Route("[controller]")]
+[Authorize]
+[Route("[controller]/[action]")]
 [Produces("application/json")]
 public abstract class RapidPayBaseController(IMapper mapper) : ControllerBase
 {

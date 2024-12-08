@@ -15,15 +15,14 @@ public class PaymentTransactionValidator : AbstractValidator<PaymentTransaction>
 	/// <summary>
 	/// Creates a valid <see cref="PaymentTransactionValidator"/> instance.
 	/// </summary>
-	public PaymentTransactionValidator(IGenericRepository<Guid> genericRepository, long cardNumber)
+	public PaymentTransactionValidator(long cardNumber)
 	{
 		_cardNumber = cardNumber;
 
 		RuleFor(x => x.Card)
 			.NotNull()
 			.WithErrorCode(nameof(ValidationMessages.RP004))
-			.WithMessage(paymentTransaction => $"{ValidationMessages.RP004}. Card: {paymentTransaction.Card.Number}")
-			.When(paymentTransaction => paymentTransaction.Card is { });
+			.WithMessage(paymentTransaction => $"{ValidationMessages.RP004}. Card: {cardNumber}");
 
 		RuleFor(x => x.Amount)
 			.GreaterThan(0)
