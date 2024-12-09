@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Models;
 using RapidPay.Api.ConfigExtensions;
 using RapidPay.Api.Middlewares;
 using RapidPay.Domain;
@@ -23,31 +22,7 @@ builder.Services.AddMvc(options =>
 	JsonSerializerGlobalOptions.SetGlobalOptions(options.JsonSerializerOptions);
 });
 
-builder.Services.AddSwaggerGen(options =>
-{
-	options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
-	{
-		Name = "Authorization",
-		In = ParameterLocation.Header,
-		Type = SecuritySchemeType.Http,
-		Scheme = "Bearer"
-	});
-
-	options.AddSecurityRequirement(new OpenApiSecurityRequirement
-	{
-		{
-			new OpenApiSecurityScheme
-			{
-				Reference = new OpenApiReference
-				{
-					Type = ReferenceType.SecurityScheme,
-					Id = "Bearer"
-				}
-			},
-			Array.Empty<string>()
-		}
-	});
-});
+builder.Services.AddSwaggerConfig();
 
 var app = builder.Build();
 

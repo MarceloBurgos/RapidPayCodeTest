@@ -44,7 +44,7 @@ public class AuthenticationService(IConfiguration configuration)
 	/// Authenticates a valid user.
 	/// </summary>
 	/// <exception cref="InvalidUserException"></exception>
-	public static User Authenticate(string userName, string password)
+	public User Authenticate(string userName, string password)
 	{
 		// This is only for testing purpose. Simulates a credentials validation.
 		if (userName.Equals("admin") && password.Equals("rapidpay123!"))
